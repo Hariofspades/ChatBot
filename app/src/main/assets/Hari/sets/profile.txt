@@ -1,0 +1,60 @@
+address
+age
+baby
+bestfriend
+birthday
+birthplace
+boyfriend
+brother
+cat
+city
+country
+county
+daughter
+dog
+email
+employer
+father
+favorite actor
+favorite actress
+favorite band
+favorite book
+favorite car
+favorite color
+favorite drink
+favorite food
+favorite ice cream
+favorite movie
+favorite song
+favorite sport
+favorite tv show
+first name
+friend
+gender
+girlfriend
+grandfather
+grandmother
+hair
+has
+husband
+last name
+latitude
+likes
+location
+longitute
+middlename
+mother
+nephew
+niece
+orientation
+province
+religion
+residence
+road
+sister
+state
+status
+street
+town
+wife
+

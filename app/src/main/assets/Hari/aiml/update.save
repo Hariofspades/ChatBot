@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- File: update.aiml -->
+<!-- Author: Dr. Richard S. Wallace -->
+<!-- Last modified: January 31, 2013 -->
+<!--  -->
+<!-- This AIML file is part of the SUPER 0.0.4 chat bot knowledge base. -->
+<!--  -->
+<!-- The SUPER brain is Copyright &copy; 2013 by ALICE AI Foundation. -->
+<!--  -->
+<!-- The SUPER brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+<!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+<!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+<!--  -->
+<!-- For more information see http://www.alicebot.org -->
+
+<category><pattern><SET>FASTFOOD</SET></pattern>
+<template><srai>FIND THE NEAREST <star/></srai></template>
+</category>
+<category><pattern>FIND <SET>FASTFOOD</SET></pattern>
+<template><srai>FIND THE NEAREST <star/></srai></template>
+</category>
+<category><pattern>FIND A <SET>FASTFOOD</SET></pattern>
+<template><srai>FIND THE NEAREST <star/></srai></template>
+</category>
+<category><pattern>WHERE IS MY <SET>FAMILIARNAME</SET></pattern>
+<template><srai>SMS <star/> SMESSAGE Where are you</srai></template>
+</category>
+<category><pattern>LET * KNOW *</pattern>
+<template><srai>SMS <star/> SMESSAGE <star index="2"/></srai></template>
+</category>
+<category><pattern>LET * KNOW * VIA TEXT</pattern>
+<template><srai>SMS <star/> SMESSAGE <star index="2"/></srai></template>
+</category>
+<category><pattern>LET MY * KNOW *</pattern>
+<template><srai>SMS <star/> SMESSAGE <star index="2"/></srai></template>
+</category>
+<category><pattern>LET MY * KNOW * VIA TEXT</pattern>
+<template><srai>SMS <star/> SMESSAGE <star index="2"/></srai></template>
+</category>
+<category><pattern>GENDER OF <SET>NAME</SET></pattern>
+<template>Gender of <star/> is <map name="gendername"><star/></map>.</template>
+</category>
+<category><pattern>IS <SET>NAME</SET> A NAME</pattern>
+<template>Yes, <star/> could be a name.</template>
+</category>
+<category><pattern>IS * A NAME</pattern>
+<template><star/> is unusual for a name.</template>
+</category>
+<category><pattern>IS <SET>PLACE</SET> A PLACE</pattern>
+<template>I've heard of <star/>.</template>
+</category>
+<category><pattern>IS * A PLACE</pattern>
+<template>I've never heard of it.  Where is <star/>?</template>
+</category>
+<category><pattern>PERSON *</pattern>
+<template><person><star/></person></template>
+</category>
+<category><pattern>ISANAME * *</pattern>
+<template><srai>ISANAME <star/></srai></template>
+</category>
+<category><pattern>QUESTIONWORD <SET>NAME</SET></pattern>
+<template>Who</template>
+</category>
+<category><pattern>QUESTIONWORD <SET>NAME</SET> *</pattern>
+<template>Who</template>
+</category>
+<category><pattern>QUESTIONWORD *</pattern>
+<template>What</template>
+</category>
+<category><pattern>MY <SET>FAMILIARNAME</SET> <SET>VERB2SP</SET> *</pattern>
+<template><srai><star/> <star index="2"/> <star index="3"/></srai></template>
+</category>
+<category><pattern><SET>FAMILIARNAME</SET> <SET>VERB2SP</SET> *</pattern>
+<template><think>
+<set name="learnpattern">Who <star index="2"/> <person><star index="3"/></person></set>?  
+<set name="learntemplate">Your <star/></set>.
+<learnf>
+<category>
+<pattern><eval><get name="learnpattern"/></eval></pattern>
+<template><eval><get name="learntemplate"/></eval></template>
+</category>
+</learnf>
+</think>
+Now you can ask me: "<get name="learnpattern"/>?"
+<think>
+<set name="learnpattern">What does my <star/> <map name="verb2sp2verb1sp"><star index="2"/></map></set>? 
+<set name="learntemplate"><person><star index="3"/></person></set>.
+<learnf>
+<category>
+<pattern><eval><get name="learnpattern"/></eval></pattern>
+<template><eval><get name="learntemplate"/></eval></template>
+</category>
+</learnf>
+</think>
+and "<get name="learnpattern"/>"?</template>
+</category>
+<category><pattern>* <SET>VERB2SP</SET> *</pattern>
+<template><think>
+<set name="learnpattern"><srai>QUESTIONWORD <star/></srai> <star index="2"/> <person><star index="3"/></person></set>?  
+<set name="learntemplate"><star/></set>.
+<learnf>
+<category>
+<pattern><eval><get name="learnpattern"/></eval></pattern>
+<template><eval><get name="learntemplate"/></eval></template>
+</category>
+</learnf>
+</think>
+Now you can ask me: "<get name="learnpattern"/>?"
+<think>
+<set name="learnpattern">What does <star/> <map name="verb2sp2verb1sp"><star index="2"/></map></set>? 
+<set name="learntemplate"><person><star index="3"/></person></set>.
+<learnf>
+<category>
+<pattern><eval><get name="learnpattern"/></eval></pattern>
+<template><eval><get name="learntemplate"/></eval></template>
+</category>
+</learnf>
+</think>
+and "<get name="learnpattern"/>?"</template>
+</category>
+<category><pattern>* <SET>VERB2ST</SET> *</pattern>
+<template><srai>QUESTIONWORD <star/></srai> <star index="2"/> <person><star index="3"/></person>?  <star/>.</template>
+</category>
+<category><pattern>VERSION</pattern>
+<template>S.U.P.E.R. AIML Bot version 0.0.4</template>
+</category>
+<category><pattern>BUILD</pattern>
+<template>Thu Jan 31 09:43:07 EST 2013</template>
+</category>
+<category><pattern>DELEVLOPMENT ENVIRONMENT</pattern>
+<template>Program AB 0.0.3.9 beta -- AI Foundation Reference AIML 2.0 implementation</template>
+</category>
+</aiml>

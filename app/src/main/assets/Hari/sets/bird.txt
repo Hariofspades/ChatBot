@@ -1,0 +1,13 @@
+crow
+pigeon
+seagull
+eagle
+hawk
+raven
+dove
+parrot
+hummingbird
+rooster
+chicken
+penguin
+turkey

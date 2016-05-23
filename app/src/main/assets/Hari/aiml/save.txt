@@ -1,0 +1,90 @@
+<category><pattern>LEARN CONTACTID * DISPLAYNAME *</pattern>
+<template><think><set name="namelist">NIL</set>
+<set name="displayname"><star index="2"/></set>
+Learn contactid <star/> DISPLAYNAME <star index="2"/> 
+newcontactid = <set name="newcontactid"><star/></set>
+namelist = <set name="namelist"><srai>NAMEVARIATIONS <get name="displayname"/></srai></set>
+</think>
+<learnf>
+<category>
+<pattern>DISPLAYNAME <eval><get name="newcontactid"/></eval></pattern>
+<template><eval><get name="displayname"/></eval></template>
+</category>
+<category>
+<pattern>CONTACTID <eval><get name="displayname"/></eval></pattern>
+<template><eval><get name="newcontactid"/></eval></template>
+</category>
+</learnf>
+<srai>PLOOP CONTACTID <get name="newcontactid"/> NAMELIST <get name="namelist"/></srai></template>
+</category>
+
+<category><pattern>PLOOP CONTACTID * NAMELIST NIL</pattern>
+<template><think>loop done</think></template>
+</category>
+<category><pattern>PLOOP CONTACTID * NAMELIST CONS * NIL</pattern>
+<template><srai>PROCESSNAME <star index="2"/> CONTACTID <star/></srai></template>
+</category>
+<category><pattern>PLOOP CONTACTID * NAMELIST CONS * CONS *</pattern>
+<template><srai>PROCESSNAME <star index="2"/> CONTACTID <star/></srai>
+<srai>PLOOP CONTACTID <star/> NAMELIST CONS <star index="3"/></srai></template>
+</category>
+
+<category><pattern>PROCESSNAME * CONTACTID *</pattern>
+<template><think>
+PROCESSNAME <star/>:
+processname = <set name="processname"><star/></set>
+processcontactid = <set name="processcontactid"><star index="2"/></set>
+existingcontactid = <set name="existingcontactid"><srai>CONTACTID <get name="processname"/></srai></set>
+multipleids = <set name="multipleids"><srai>MULTIPLEIDS <get name="processname"/></srai></set>
+multiplenames = <set name="multiplenames"><srai>MULTIPLENAMES <get name="processname"/></srai></set>
+isamember = <set name="isamember"><srai>ATOMICLISTMEMBER <get name="newcontactid"/> <get name="multipleids"/></srai></set>
+isequalto = <set name="isequalto"><srai>IS <get name="processcontactid"/> EQUALTO <get name="existingcontactid"/></srai></set>
+</think>
+<condition name="multipleids">
+<li value="false"><!-- MultipleIDs false. -->
+  <condition name="existingcontactid">
+  <li value="unknown"><!-- No existing ContactID. -->
+  <think>
+
+  learnpattern = <set name="learnpattern">CONTACTID <get name="processname"/></set>
+  learntemplate = <set name="learntemplate"><get name="processcontactid"/></set>
+  </think>
+  <learnf>
+  <category><pattern><eval><get name="learnpattern"/></eval></pattern>
+  <template><eval><get name="learntemplate"/></eval></template>
+  </category>
+  </learnf>
+  </li>
+  <li>Contactid <get name="existingcontactid"/>.
+  <condition name="isequalto" value="false">
+  <think>
+  learnpattern = <set name="learnpattern">MULTIPLEIDS <star/></set>
+  learntemplate = <set name="learntemplate"><get name="processcontactid"/> <get name="existingcontactid"/></set>
+  </think>
+  <learnf>
+  <category><pattern><eval><get name="learnpattern"/></eval></pattern>
+  <template><eval><get name="learntemplate"/></eval></template>
+  </category>
+  </learnf>
+  </condition>
+  </li>
+  </condition>
+</li>
+<li><!-- MultipleIDS <get name="multipleids"/>. -->
+
+  <condition name="isamember" value="false">
+  <think>
+  learnpattern = <set name="learnpattern">MULTIPLEIDS <star/></set>
+  learntemplate = <set name="learntemplate"><get name="processcontactid"/> <get name="multipleids"/></set>
+  </think>
+
+
+  <learnf>
+  <category><pattern><eval><get name="learnpattern"/></eval></pattern>
+  <template><eval><get name="learntemplate"/></eval></template>
+  </category>
+  </learnf>
+  </condition>
+</li>
+</condition></template>
+</category>
